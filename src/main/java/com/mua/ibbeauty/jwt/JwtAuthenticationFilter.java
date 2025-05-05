@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -28,16 +29,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String BEARER_PREFIX = "Bearer ";
 
-    // List of public endpoints that don't require JWT authentication
-    private static final List<String> PUBLIC_PATHS = List.of(
-            "/jwt/generate",
-            "/user/register",
-            "/post",
-            "/post/paginated",
-            "/reservation",
-            "/reservation/paginated",
+    // Paths that should be publicly accessible (no JWT required)
+    private static final List<String> PUBLIC_PATH_PATTERNS = List.of(
+            "/**/jwt/generate",
+            "/**/user/register",
+            "/**/post",
+            "/**/post/paginated",
+            "/**/reservation",
+            "/**/reservation/paginated",
             "/error"
     );
+
+    private final AntPathMatcher pathMatcher = new AntPathMatcher();
+
+    private boolean isPublicPath(String uri) {
+        return PUBLIC_PATH_PATTERNS.stream().anyMatch(pattern -> pathMatcher.match(pattern, uri));
+    }
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -48,8 +55,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             String requestURI = request.getRequestURI();
 
-            // Skip JWT check for public paths
-            if (PUBLIC_PATHS.stream().anyMatch(requestURI::startsWith)) {
+            // Allow requests to public paths without authentication
+            if (isPublicPath(requestURI)) {
                 filterChain.doFilter(request, response);
                 return;
             }
