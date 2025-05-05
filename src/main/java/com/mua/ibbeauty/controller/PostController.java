@@ -21,8 +21,8 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/post")
-@CrossOrigin(origins = "http://localhost:3000") // Allow only the frontend origin
+@RequestMapping("/api/post")
+@CrossOrigin
 public class PostController {
 
     private final PostService postService;

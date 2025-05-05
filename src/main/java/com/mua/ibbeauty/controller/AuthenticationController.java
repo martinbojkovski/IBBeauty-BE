@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/jwt")
+@RequestMapping("/api/jwt")
 @CrossOrigin
 public class AuthenticationController {
 
