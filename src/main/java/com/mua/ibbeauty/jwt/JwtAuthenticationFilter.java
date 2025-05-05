@@ -30,11 +30,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     // List of public endpoints that don't require JWT authentication
     private static final List<String> PUBLIC_PATHS = List.of(
-            "/api/jwt/generate",
-            "/api/user/register",
-            "/api/post/paginated",
-            "/api/reservation",
-            "/error/"
+            "/jwt/generate",
+            "/user/register",
+            "/post",
+            "/post/paginated",
+            "/reservation",
+            "/reservation/paginated",
+            "/error"
     );
 
     @Override

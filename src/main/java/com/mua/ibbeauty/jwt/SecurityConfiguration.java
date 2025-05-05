@@ -31,8 +31,8 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final PasswordEncoder passwordEncoder;
 
-    private static final String USERS_LOGIN_PATH = "/api/jwt/generate";
-    private static final String USERS_REGISTER_PATH = "/api/user/register";
+    private static final String USERS_LOGIN_PATH = "/jwt/generate";
+    private static final String USERS_REGISTER_PATH = "/user/register";
     private static final String ERROR_PATH = "/error/**";
 
     @Bean
@@ -41,8 +41,8 @@ public class SecurityConfiguration {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(USERS_LOGIN_PATH, USERS_REGISTER_PATH, "/api/post",
-                                "/api/post/paginated", "/api/reservation", "/api/reservation/paginated")
+                        .requestMatchers(USERS_LOGIN_PATH, USERS_REGISTER_PATH, "/post",
+                                "/post/paginated", "/reservation", "/reservation/paginated")
                         .permitAll()
                         .requestMatchers(ERROR_PATH).permitAll()
                         .anyRequest().authenticated()

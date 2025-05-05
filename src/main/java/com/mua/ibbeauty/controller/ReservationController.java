@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/reservation")
+@RequestMapping("/reservation")
 @CrossOrigin
 public class ReservationController {
     private final ReservationService reservationService;
