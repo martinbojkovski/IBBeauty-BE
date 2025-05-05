@@ -1,14 +1,11 @@
 package com.mua.ibbeauty.service.impl;
 
-import com.mua.ibbeauty.exceptions.PostNotFoundException;
 import com.mua.ibbeauty.exceptions.ReservationNotFoundException;
 import com.mua.ibbeauty.model.DTO.ReservationRequestDTO;
 import com.mua.ibbeauty.model.Reservation;
 import com.mua.ibbeauty.repository.ReservationRepository;
 import com.mua.ibbeauty.service.ReservationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,17 +18,13 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<Reservation> getAllReservations() {
-        return reservationRepository.findAll();
+        System.out.println("Fetching all reservations");
+        return reservationRepository.findAllWithServices();
     }
 
     @Override
     public Reservation getReservation(UUID Id) {
         return reservationRepository.findById(Id).orElseThrow(() -> new ReservationNotFoundException(Id));
-    }
-
-    @Override
-    public Page<Reservation> getAllReservationsPageable(Pageable pageable) {
-        return reservationRepository.findAll(pageable);
     }
 
     @Override

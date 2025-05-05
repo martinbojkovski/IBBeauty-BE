@@ -4,9 +4,6 @@ import com.mua.ibbeauty.model.DTO.ReservationRequestDTO;
 import com.mua.ibbeauty.model.Reservation;
 import com.mua.ibbeauty.service.ReservationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,16 +30,6 @@ public class ReservationController {
         Reservation result = reservationService.getReservation(reservationId);
 
         return ResponseEntity.ok(result);
-    }
-
-    @GetMapping("/paginated")
-    public ResponseEntity<Page<Reservation>> getAllPosts(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-
-        Pageable pageable = PageRequest.of(page, size);
-
-        return ResponseEntity.ok(reservationService.getAllReservationsPageable(pageable));
     }
 
     @PostMapping("/insert")

@@ -42,7 +42,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(USERS_LOGIN_PATH, USERS_REGISTER_PATH, "/post",
-                                "/post/paginated", "/reservation", "/reservation/paginated")
+                                "/post/paginated", "/reservation")
                         .permitAll()
                         .requestMatchers(ERROR_PATH).permitAll()
                         .anyRequest().authenticated()
@@ -58,7 +58,7 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://ibbeauty.mk"));
+        configuration.setAllowedOrigins(List.of("https://ibbeauty.mk", "http://localhost:3000"));
         configuration.setAllowedMethods(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true); // Allow cookies/auth headers
