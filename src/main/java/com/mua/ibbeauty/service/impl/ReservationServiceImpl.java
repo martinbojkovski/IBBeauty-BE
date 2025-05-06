@@ -31,6 +31,7 @@ public class ReservationServiceImpl implements ReservationService {
     public Reservation addReservation(ReservationRequestDTO reservationRequestDTO) {
         Reservation reservation = new Reservation();
         reservation.setName(reservationRequestDTO.name());
+        reservation.setPerson(reservationRequestDTO.person());
         reservation.setReservationStart(reservationRequestDTO.start());
         reservation.setReservationEnd(reservationRequestDTO.end());
         reservation.setType(reservationRequestDTO.type());
@@ -59,6 +60,9 @@ public class ReservationServiceImpl implements ReservationService {
 
         reservation.setName(reservationRequestDTO.name() != null && !reservationRequestDTO.name().isBlank()
                 ? reservationRequestDTO.name() : reservation.getName());
+
+        reservation.setPerson(
+                reservationRequestDTO.person() != null ? reservationRequestDTO.person() : reservation.getPerson());
 
         reservation.setDescription(
                 reservationRequestDTO.description() != null && !reservationRequestDTO.description().isBlank()

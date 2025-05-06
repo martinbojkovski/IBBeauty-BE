@@ -1,5 +1,6 @@
 package com.mua.ibbeauty.model.DTO;
 
+import com.mua.ibbeauty.model.enums.Person;
 import com.mua.ibbeauty.model.enums.Service;
 import jakarta.validation.constraints.NotBlank;
 
@@ -11,6 +12,9 @@ public record ReservationRequestDTO(
          UUID Id,
          @NotBlank
          String name,
+
+         @NotBlank
+         Person person,
          @NotBlank
          LocalDateTime start,
          @NotBlank

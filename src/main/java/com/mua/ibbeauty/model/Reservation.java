@@ -1,5 +1,6 @@
 package com.mua.ibbeauty.model;
 
+import com.mua.ibbeauty.model.enums.Person;
 import com.mua.ibbeauty.model.enums.Service;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,9 @@ public class Reservation {
     private UUID Id;
 
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    private Person person;
 
     private LocalDateTime reservationStart;
 
