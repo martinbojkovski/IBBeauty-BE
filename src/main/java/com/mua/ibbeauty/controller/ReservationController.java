@@ -25,6 +25,13 @@ public class ReservationController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Reservation>> getAllReservationsByName(@RequestParam String name) {
+        List<Reservation> result = reservationService.getAllReservationsByName(name);
+
+        return ResponseEntity.ok(result);
+    }
+
     @GetMapping("/{reservationId}")
     public ResponseEntity<Reservation> getPost(@PathVariable UUID reservationId){
         Reservation result = reservationService.getReservation(reservationId);

@@ -10,6 +10,8 @@ public interface ReservationService {
 
     Reservation getReservation(UUID Id);
 
+    List<Reservation> getAllReservationsByName(String name);
+
     Reservation addReservation(ReservationRequestDTO reservationRequestDTO);
 
     Reservation deleteReservation(UUID Id);

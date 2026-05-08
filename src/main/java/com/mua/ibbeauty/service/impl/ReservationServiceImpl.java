@@ -28,6 +28,11 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public List<Reservation> getAllReservationsByName(String name) {
+        return reservationRepository.findAllByName(name);
+    }
+
+    @Override
     public Reservation addReservation(ReservationRequestDTO reservationRequestDTO) {
         Reservation reservation = new Reservation();
         reservation.setName(reservationRequestDTO.name());
